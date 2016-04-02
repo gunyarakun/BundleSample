@@ -1,0 +1,9 @@
+BundleSample.xcodeproj/project.xcworkspace/
+BundleSample.xcodeproj/xcuserdata/
+BundleSample.app.dSYM.zip
+BundleSample.ipa
+*.o
+.*.swp
+build
+err
+unresolved
