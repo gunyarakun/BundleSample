@@ -20,23 +20,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    // Fetch file (obj-c)
+    // generate path with obj-c functions
     NSBundle *frameworkBundle = [[NSBundle alloc] initWithPath:@"/frameworks/CoreFoundation.framework/Resources"];
     NSString *path = [frameworkBundle pathForResource:@"CFUniCharPropertyDatabase" ofType:@"data"];
-    NSError *error0 = nil;
-    NSString *bundleData = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error: &error0];
 
-    // Fetch file (c)
-    int fd = open("/frameworks/CoreFoundation.framework/Resources/CFUniCharPropertyDatabase.data", O_RDONLY);
+    // fetch file size with c functions
+    int fd = open(path.UTF8String, O_RDONLY);
     struct stat st;
     fstat(fd, &st);
     close(fd);
 
+    // create and show a label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:30];
-
-    label.text = [NSString stringWithFormat:@"size: %lu %u", (unsigned long)[bundleData length], st.st_size];
+    label.font = [UIFont systemFontOfSize:6];
+    label.text = [NSString stringWithFormat:@"size: %u", st.st_size];
     [label sizeToFit];
     [self.view addSubview:label];
 }
