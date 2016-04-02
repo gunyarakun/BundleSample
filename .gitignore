@@ -7,3 +7,5 @@ BundleSample.ipa
 build
 err
 unresolved
+.ninja*
+ninja
